@@ -10,7 +10,7 @@ class AppRouter {
   Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case splashScreen:
-        return MaterialPageRoute(builder: (_) =>  LoginScreen());
+        return MaterialPageRoute(builder: (_) =>  SplashView());
       case loginScreen:
           return MaterialPageRoute(builder: (_) => LoginScreen());
       case registerScreen:

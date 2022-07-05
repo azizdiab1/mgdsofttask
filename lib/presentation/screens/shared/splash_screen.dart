@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:magdsoft_flutter_structure/presentation/screens/shared/splash_body.dart';
+import 'package:magdsoft_flutter_structure/presentation/styles/colors.dart';
 
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+class SplashView extends StatelessWidget {
+  const SplashView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      backgroundColor:AppColor.white ,
+      body: SplashBody(),
+    );
   }
 }

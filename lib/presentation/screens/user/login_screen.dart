@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:magdsoft_flutter_structure/business_logic/login_cubit/login_cubit.dart';
 import 'package:magdsoft_flutter_structure/business_logic/login_cubit/login_states.dart';
+import 'package:magdsoft_flutter_structure/data/local/cache_helper.dart';
+import 'package:magdsoft_flutter_structure/presentation/router/app_router.dart';
+import 'package:magdsoft_flutter_structure/presentation/router/strings.dart';
 import 'package:magdsoft_flutter_structure/presentation/styles/colors.dart';
 import 'package:magdsoft_flutter_structure/presentation/widget/toast.dart';
 
@@ -15,11 +18,12 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    late var formKey =GlobalKey<FormState>();
+  var  emailController=TextEditingController();
+  var  passwordController=TextEditingController();
     final width=MediaQuery.of(context).size.width;
     final height=MediaQuery.of(context).size.height;
-    late var formKey=GlobalKey<FormState>();
-    var  emailController=TextEditingController();
-    var  passwordController=TextEditingController();
+
     return BlocProvider(
       create: (BuildContext context)=>LoginCubit(),
       child: BlocConsumer<LoginCubit,LoginStates>(
@@ -27,6 +31,11 @@ class LoginScreen extends StatelessWidget {
                   if(state is LoginSuccessState){
                     if(state.accountModel.status==200){
                       showToast("Logedin Successfully");
+                      CacheHelper.saveDataSharedPreference(key: 'name', value: '${state.accountModel.account!.name}');
+                      CacheHelper.saveDataSharedPreference(key: 'name', value: '${state.accountModel.account!.id}');
+                      CacheHelper.saveDataSharedPreference(key: 'name', value: '${state.accountModel.account!.phone}');
+                      CacheHelper.saveDataSharedPreference(key: 'name', value: '${state.accountModel.account!.email}');
+                      Navigator.pushNamed(context, userScreen,arguments: state.accountModel);
                     }else if(state.accountModel.status==404){
                       showToast(state.accountModel.message);
                     }
@@ -121,11 +130,13 @@ class LoginScreen extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  DefaultButton(onpressed: (){}, text: "Register",width: width*0.3707,height: height*0.0701,background: AppColor.blue),
+                                  DefaultButton(onpressed: (){
+                                    Navigator.pushNamed(context, registerScreen);
+                                  }, text: "Register",width: width*0.3707,height: height*0.0701,background: AppColor.blue),
                                   Spacer(),
                                   DefaultButton(onpressed: (){
                                     if(formKey.currentState!.validate()){
-                                      LoginCubit.get(context).logIn(email: emailController.text, password: passwordController.text);
+                                      LoginCubit.get(context).logIn(email: "ahmed@gmail.com", password: "123456");
                                     }
                                   }, text: "Login",width: width*0.3707,height: height*0.0701,background: AppColor.blue)
                                 ],

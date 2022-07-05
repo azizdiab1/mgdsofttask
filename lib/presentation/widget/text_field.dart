@@ -15,7 +15,7 @@ Widget DefaultTextField({
       decoration: InputDecoration(
           border: OutlineInputBorder(),
           labelText: '$labeltext',
-          suffixIcon: IconButton(onPressed: (){suffiexPressed!();}, icon: Icon(sufix))),
+         ),
       validator: (s) {
         validate(s);
       },

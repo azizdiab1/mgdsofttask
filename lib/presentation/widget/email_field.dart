@@ -11,7 +11,9 @@ Widget DefaultEmailField({
 }) =>
     TextFormField(
       controller: controller,
-      keyboardType: tybe,
+      autocorrect: false,
+
+      keyboardType: TextInputType.visiblePassword,
       decoration: InputDecoration(
         labelText: labelText ,
         hintText: hintText,

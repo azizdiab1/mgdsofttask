@@ -13,7 +13,8 @@ Widget DefaultPasswordField({
     TextFormField(
       controller: controller,
       obscureText: isPassword,
-      keyboardType: tybe,
+      keyboardType: TextInputType.visiblePassword,
+      autocorrect: false,
       decoration: InputDecoration(
           border: OutlineInputBorder(),
           labelText: '$labeltext',
